@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 40px;
+}
+
+.upload-container {
+  margin-top: 20px;
+}
+
+.image-preview, .image-result {
+  max-width: 400px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
