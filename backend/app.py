@@ -4,7 +4,12 @@ from ultralytics import YOLO
 import os
 import uuid
 
-app = Flask(__name__)
+# Set up Flask with React build folder
+app = Flask(
+    __name__,
+    static_folder='../frontend/build',  # React build folder
+    static_url_path=''  # to allow serving index.html at root
+)
 CORS(app)  # Enables CORS for all domains by default
 
 UPLOAD_FOLDER = 'static/uploads'
@@ -19,10 +24,20 @@ os.makedirs(PRED_FOLDER, exist_ok=True)
 print(f"🔍 Loading model from: {os.path.abspath(WEIGHT_PATH)}")
 model = YOLO(WEIGHT_PATH)
 
+# 📦 Serve React frontend
 @app.route('/')
-def index():
-    return "Rubber Tree Detector Backend is Running"
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
 
+@app.route('/<path:path>')
+def serve_react(path):
+    file_path = os.path.join(app.static_folder, path)
+    if os.path.exists(file_path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+# 🔍 API endpoint for predictions
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
@@ -44,9 +59,11 @@ def predict():
 
     return jsonify({'prediction_path': f'/static/predictions/{filename}'})
 
+# 📤 Serve predicted image files
 @app.route('/static/predictions/<filename>')
 def serve_prediction(filename):
     return send_from_directory(PRED_FOLDER, filename)
 
+# 🏁 App entry point
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
