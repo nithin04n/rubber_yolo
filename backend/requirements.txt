@@ -1,4 +1,6 @@
 flask
-flask-cors
 gunicorn
+flask-cors
 ultralytics
+opencv-python-headless
+pillow

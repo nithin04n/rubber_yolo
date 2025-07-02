@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"  # Maps container port 80 to host port 80
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"  # Maps container port 5000 to host port 5000
+    volumes:
+      - ./backend/static:/app/static  # Optional: if you serve/upload static files
+    restart: always
