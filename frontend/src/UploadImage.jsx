@@ -41,7 +41,8 @@ const UploadImage = () => {
     formData.append('image', image);
 
     try {
-      const res = await fetch('http://localhost:5000/predict', {
+      // ✅ Use relative path to avoid localhost issues in Docker/AWS
+      const res = await fetch('/predict', {
         method: 'POST',
         body: formData,
       });
@@ -49,9 +50,9 @@ const UploadImage = () => {
       const data = await res.json();
       clearInterval(progressInterval);
       setUploadProgress(100);
-      
+
       if (data.prediction_path) {
-        setResultUrl(`http://localhost:5000${data.prediction_path}`);
+        setResultUrl(data.prediction_path); // already includes /static path
       } else {
         setError('Prediction failed. Try again.');
       }
@@ -70,9 +71,7 @@ const UploadImage = () => {
       <div className="header-section">
         <div className="title-wrapper">
           <span className="tree-icon bounce-1">🌲</span>
-          <h1 className="plantation-title">
-            Rubber Tree Segmentation
-          </h1>
+          <h1 className="plantation-title">Rubber Tree Segmentation</h1>
           <span className="tree-icon bounce-2">🌲</span>
         </div>
         <p className="subtitle">
@@ -88,7 +87,7 @@ const UploadImage = () => {
               <div className="upload-icon">📤</div>
               <div className="ping-dot"></div>
             </div>
-            
+
             <div className="upload-text">
               <h3>Upload Your Plantation Image</h3>
               <p>Drag and drop or click to select your rubber tree image</p>
@@ -112,7 +111,7 @@ const UploadImage = () => {
                   <span>Processing... {uploadProgress}%</span>
                 </div>
                 <div className="progress-bar">
-                  <div 
+                  <div
                     className="progress-fill"
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
