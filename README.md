@@ -1,54 +1,48 @@
-  # 🌿 Rubber Tree Disease Detection (YOLOv8 + Flask + React)
+Rubber Tree Detection (YOLOv8 + Flask + React)
+This project is a full-stack deep learning application designed to detect and localize rubber tree leaves in images using a YOLOv8 object detection model. It features a clean and intuitive web interface for uploading images and viewing prediction results with bounding boxes.
 
-This project is a full-stack deep learning application that detects diseases in rubber tree leaves using a YOLOv8 object detection model. It provides a user-friendly web interface to upload leaf images and get predictions with bounding boxes.
+Tech Stack:
+Frontend: React + Nginx
 
----
+Backend: Flask (Python)
 
-## 🔧 Tech Stack
+Dataset: CVAT annotated 
 
-- **Frontend**: React + Nginx
-- **Backend**: Flask (Python)
-- **Model**: YOLOv8 (`Ultralytics`)
-- **Containerization**: Docker & Docker Compose
-- **Deployment-ready** for AWS EC2 or Render
+Model: YOLOv8 (Ultralytics)
 
----
+Containerization: Docker & Docker Compose
 
-## 🚀 Features
+Deployment-ready for AWS EC2 or Render
 
-- Upload rubber tree leaf images
-- Real-time disease detection using trained YOLOv8 model
-- Prediction images with bounding boxes
-- Dockerized backend and frontend
-- Easily deployable on cloud servers
+Features:
+Upload images containing rubber tree leaves
 
----
+Real-time detection and localization using YOLOv8
 
-## 📁 Project Structure
+Output images with bounding boxes drawn around detected leaves
 
-rubber_yolo/
+Dockerized backend and frontend for easy deployment
+
+Cloud-friendly architecture
+
+📁 Project Structure
+bash
+Copy
+Edit
+rubber_leaf_detector/
 │
 ├── backend/
-│ ├── app.py # Flask app
-│ ├── weights/best.pt # Trained YOLOv8 model
-│ └── static/
-│ ├── uploads/ # Uploaded images
-│ └── predictions/ # YOLOv8 output images
+│   ├── app.py               # Flask app
+│   ├── weights/best.pt      # Trained YOLOv8 model
+│   └── static/
+│       ├── uploads/         # Uploaded images
+│       └── predictions/     # YOLOv8 output images
 │
 ├── frontend/
-│ ├── UploadImage.jsx # React component
-│ ├── index.js, App.js # React root files
-│ ├── UploadImage.css # Styling
-│ └── Dockerfile # Nginx setup
+│   ├── UploadImage.jsx      # React component
+│   ├── index.js, App.js     # React root files
+│   ├── UploadImage.css      # Styling
+│   └── Dockerfile           # Nginx setup
 │
 ├── docker-compose.yml
 └── README.md
-
-
- 
-
-
-
-
-
-
