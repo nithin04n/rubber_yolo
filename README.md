@@ -1,4 +1,6 @@
 Rubber Tree Detection (YOLOv8 + Flask + React)
+
+
 This project is a full-stack deep learning application designed to detect and localize rubber tree leaves in images using a YOLOv8 object detection model. It features a clean and intuitive web interface for uploading images and viewing prediction results with bounding boxes.
 
 Tech Stack:
